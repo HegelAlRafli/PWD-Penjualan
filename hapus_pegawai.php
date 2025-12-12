@@ -5,7 +5,7 @@ include 'koneksi.php';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($id > 0) {
-    $query = "DELETE FROM barang WHERE id = $id";
+    $query = "DELETE FROM pegawai WHERE id_pegawai = $id";
 
     if (mysqli_query($koneksi, query: $query)) {
         $_SESSION['pesan'] = "Barang berhasil dihapus!";
@@ -16,6 +16,5 @@ if ($id > 0) {
     }
 }
 
-header("Location: index.php?page=data_barang");
+header("Location: index.php?page=pegawai");
 exit();
-?>
