@@ -67,8 +67,9 @@ $result = mysqli_query($koneksi, $query);
                                         title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="hapus.php?id=<?php echo $row['id_pegawai']; ?>" class="btn-action btn-delete"
-                                        title="Hapus" onclick="return confirm('Yakin hapus pegawai ini?')">
+                                    <a href="hapus_pegawai.php?id=<?php echo $row['id_pegawai']; ?>"
+                                        class="btn-action btn-delete" title="Hapus"
+                                        onclick="return confirm('Yakin hapus pegawai ini?')">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
