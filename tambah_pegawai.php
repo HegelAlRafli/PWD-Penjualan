@@ -176,7 +176,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <select id="status_aktif" name="status_aktif" required>
                                     <option value="1">Aktif</option>
                                     <option value="0">Non-Aktif</option>
-                                    <option value="2">Cuti</option>
                                 </select>
                             </div>
                         </div>

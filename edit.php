@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="content-wrapper">
     <?php include 'includes/menu.php'; ?>
-    
+
     <main class="main-content">
         <div class="page-header">
             <h2>Edit Barang</h2>
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <span>Edit Barang</span>
             </div>
         </div>
-        
+
         <div class="content">
             <div class="card">
                 <div class="card-header">
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <i class="fas fa-arrow-left"></i> Kembali
                     </a>
                 </div>
-                
+
                 <div class="card-body">
                     <form method="POST" class="form-vertical">
                         <div class="form-row">
@@ -91,19 +91,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label for="kode_barang">
                                     <i class="fas fa-barcode"></i> Kode Barang *
                                 </label>
-                                <input type="text" id="kode_barang" name="kode_barang" 
-                                       value="<?php echo htmlspecialchars($barang['kode_barang']); ?>" required>
+                                <input type="text" id="kode_barang" name="kode_barang"
+                                    value="<?php echo htmlspecialchars($barang['kode_barang']); ?>" required>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="nama_barang">
                                     <i class="fas fa-box"></i> Nama Barang *
                                 </label>
-                                <input type="text" id="nama_barang" name="nama_barang" 
-                                       value="<?php echo htmlspecialchars($barang['nama_barang']); ?>" required>
+                                <input type="text" id="nama_barang" name="nama_barang"
+                                    value="<?php echo htmlspecialchars($barang['nama_barang']); ?>" required>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="kategori">
@@ -111,52 +111,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </label>
                                 <select id="kategori" name="kategori" required>
                                     <option value="">Pilih Kategori</option>
-                                    <option value="Elektronik" <?php echo $barang['kategori'] == 'Elektronik' ? 'selected' : ''; ?>>Elektronik</option>
-                                    <option value="Pakaian" <?php echo $barang['kategori'] == 'Pakaian' ? 'selected' : ''; ?>>Pakaian</option>
-                                    <option value="Makanan" <?php echo $barang['kategori'] == 'Makanan' ? 'selected' : ''; ?>>Makanan</option>
-                                    <option value="Minuman" <?php echo $barang['kategori'] == 'Minuman' ? 'selected' : ''; ?>>Minuman</option>
-                                    <option value="Alat Tulis" <?php echo $barang['kategori'] == 'Alat Tulis' ? 'selected' : ''; ?>>Alat Tulis</option>
-                                    <option value="Olahraga" <?php echo $barang['kategori'] == 'Olahraga' ? 'selected' : ''; ?>>Olahraga</option>
-                                    <option value="Lainnya" <?php echo $barang['kategori'] == 'Lainnya' ? 'selected' : ''; ?>>Lainnya</option>
+                                    <option value="Elektronik"
+                                        <?php echo $barang['kategori'] == 'Elektronik' ? 'selected' : ''; ?>>Elektronik
+                                    </option>
+                                    <option value="Pakaian"
+                                        <?php echo $barang['kategori'] == 'Pakaian' ? 'selected' : ''; ?>>Pakaian
+                                    </option>
+                                    <option value="Makanan"
+                                        <?php echo $barang['kategori'] == 'Makanan' ? 'selected' : ''; ?>>Makanan
+                                    </option>
+                                    <option value="Minuman"
+                                        <?php echo $barang['kategori'] == 'Minuman' ? 'selected' : ''; ?>>Minuman
+                                    </option>
+                                    <option value="Alat Tulis"
+                                        <?php echo $barang['kategori'] == 'Alat Tulis' ? 'selected' : ''; ?>>Alat Tulis
+                                    </option>
+                                    <option value="Olahraga"
+                                        <?php echo $barang['kategori'] == 'Olahraga' ? 'selected' : ''; ?>>Olahraga
+                                    </option>
+                                    <option value="Lainnya"
+                                        <?php echo $barang['kategori'] == 'Lainnya' ? 'selected' : ''; ?>>Lainnya
+                                    </option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="stok">
                                     <i class="fas fa-cubes"></i> Stok *
                                 </label>
-                                <input type="number" id="stok" name="stok" 
-                                       value="<?php echo $barang['stok']; ?>" min="0" required>
+                                <input type="number" id="stok" name="stok" value="<?php echo $barang['stok']; ?>"
+                                    min="0" required>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="harga">
                                     <i class="fas fa-money-bill-wave"></i> Harga (Rp) *
                                 </label>
-                                <input type="number" id="harga" name="harga" 
-                                       value="<?php echo $barang['harga']; ?>" min="0" required>
+                                <input type="number" id="harga" name="harga" value="<?php echo $barang['harga']; ?>"
+                                    min="0" required>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="status">
                                     <i class="fas fa-toggle-on"></i> Status
                                 </label>
                                 <select id="status" name="status" required>
-                                    <option value="aktif" <?php echo $barang['status'] == 'aktif' ? 'selected' : ''; ?>>Aktif</option>
-                                    <option value="nonaktif" <?php echo $barang['status'] == 'nonaktif' ? 'selected' : ''; ?>>Nonaktif</option>
+                                    <option value="aktif" <?php echo $barang['status'] == 'aktif' ? 'selected' : ''; ?>>
+                                        Aktif</option>
+                                    <option value="nonaktif"
+                                        <?php echo $barang['status'] == 'nonaktif' ? 'selected' : ''; ?>>Nonaktif
+                                    </option>
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="deskripsi">
                                 <i class="fas fa-align-left"></i> Deskripsi
                             </label>
-                            <textarea id="deskripsi" name="deskripsi" rows="4"><?php echo htmlspecialchars($barang['deskripsi']); ?></textarea>
+                            <textarea id="deskripsi" name="deskripsi"
+                                rows="4"><?php echo htmlspecialchars($barang['deskripsi']); ?></textarea>
                         </div>
-                        
+
                         <div class="form-actions">
                             <button type="reset" class="btn btn-secondary">
                                 <i class="fas fa-redo"></i> Reset
