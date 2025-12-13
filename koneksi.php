@@ -1,8 +1,8 @@
 <?php
 // Koneksi server
-$host     = "192.168.10.252";
-$username = "a122407296_user_barang";   // user database
-$password = "barang123";            // password database
+$host     = "";
+$username = "root";   // user database
+$password = "";            // password database
 $database = "a122407296_db_barang"; // nama database
 
 
@@ -21,6 +21,6 @@ $koneksi = mysqli_connect($host, $username, $password, $database);
 if (!$koneksi) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }else{
-    //die("aman syg");
+    // die("aman syg");
 }
 ?>

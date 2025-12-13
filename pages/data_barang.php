@@ -1,6 +1,8 @@
 <?php
     // Query data barang
-    include 'koneksi.php';
+    if (!isset($koneksi)) {
+        include 'koneksi.php'; // Cukup panggil langsung
+    }
     $query = "SELECT * FROM barang ORDER BY id DESC";
     $result = mysqli_query($koneksi, $query);
 ?>
@@ -23,10 +25,11 @@
         <!-- Tabel Data Barang -->
         <div class="table-container">
             <table class="data-table">
-                <thead>
+            <thead>
                     <tr>
-                        <th>No</th>
                         <th>Kode Barang</th>
+                        <th >No</th>                        
+                        <th >Foto</th>
                         <th>Nama Barang</th>
                         <th>Stok</th>
                         <th>Harga</th>
@@ -41,6 +44,14 @@
                             <td><?php echo $no++; ?></td>
                             <td>
                                 <strong><?php echo htmlspecialchars($row['kode_barang']); ?></strong>
+                            </td>
+                            <td>
+                                <?php 
+                                    $foto = !empty($row['foto']) ? $row['foto'] : 'default_barang.jpg';
+                                ?>
+                                <img src="uploads/<?php echo htmlspecialchars($foto); ?>" 
+                                     alt="Img" 
+                                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd;">
                             </td>
                             <td>
                                 <?php echo htmlspecialchars($row['nama_barang']); ?>
