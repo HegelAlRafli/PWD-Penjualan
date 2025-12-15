@@ -56,6 +56,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 case 'pengaturan':
                     include 'pages/pengaturan.php';
                     break;
+        
                 default:
                     include 'pages/dashboard.php';
             }

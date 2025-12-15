@@ -59,7 +59,7 @@ $result = mysqli_query($koneksi, $query);
                             </span>
                         </td>
                         <td class="action-buttons">
-                            <a href="detail.php?id=<?php echo $row['id_pegawai']; ?>" class="btn-action btn-view"
+                            <a href="detail_pegawai.php?id=<?php echo $row['id_pegawai']; ?>" class="btn-action btn-view"
                                 title="Detail Lengkap">
                                 <i class="fas fa-eye"></i>
                             </a>
