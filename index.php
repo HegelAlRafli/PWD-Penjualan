@@ -18,7 +18,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             $page_titles = array(
                 'dashboard' => 'Dashboard',
                 'data_barang' => 'Data Barang',
-                'pegawai' => 'Pegawai',
+                'data_pegawai' => 'Pegawai',
                 'kategori' => 'Kategori Barang',
                 'laporan' => 'Laporan',
                 'pengaturan' => 'Pengaturan Sistem',
@@ -44,9 +44,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 case 'data_barang':
                     include 'pages/data_barang.php';
                     break;
-                case 'pegawai':
-                    include 'pages/pegawai.php';
-                    break;
+           case 'data_pegawai': // <--- Ubah ini biar cocok dengan edit_pegawai.php
+    include 'pages/pegawai.php';
+    break;
                 case 'kategori':
                     include 'pages/kategori.php';
                     break;

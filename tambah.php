@@ -141,6 +141,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <option value="Minuman">Minuman</option>
                                     <option value="Alat Tulis">Alat Tulis</option>
                                     <option value="Olahraga">Olahraga</option>
+                                                                        <option value="Alustista">Alustista</option>
+                                                                        <option value="Alat Tempur">Alat Tempur 😘</option>
+
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
                             </div>

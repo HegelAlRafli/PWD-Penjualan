@@ -221,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <button type="reset" class="btn btn-secondary">
                                 <i class="fas fa-redo"></i> Reset
                             </button>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" href>
                                 <i class="fas fa-save"></i> Simpan Perubahan
                             </button>
                         </div>

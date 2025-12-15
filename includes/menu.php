@@ -5,13 +5,11 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 // Data menu
 $menu_items = array(
-    'dashboard' => array(
+   'dashboard' => array(
         'icon' => 'fas fa-home',
         'title' => 'Dashboard',
         'link' => 'index.php',
-        // REVISI DI SINI:
-        // Aktif jika tidak ada ?page ATAU ?page=dashboard
-        'active' => !isset($_GET['page']) || $_GET['page'] == 'dashboard'
+        'active' => (!isset($_GET['page']) && basename($_SERVER['PHP_SELF']) == 'index.php') || (isset($_GET['page']) && $_GET['page'] == 'dashboard')
     ),
     'data_barang' => array(
         'icon' => 'fas fa-box',
@@ -20,13 +18,18 @@ $menu_items = array(
         // Gunakan $current_page yang sudah kita definisikan di atas
         'active' => $current_page == 'data_barang' ||
             basename($_SERVER['PHP_SELF']) == 'tambah.php' ||
-            basename($_SERVER['PHP_SELF']) == 'edit.php'
+            basename($_SERVER['PHP_SELF']) == 'edit.php' || 
+                 basename($_SERVER['PHP_SELF']) == 'detail_barang.php'
     ),
-    'pegawai' => array(
+    'data_pegawai' => array(
         'icon' => 'fas fa-user',
         'title' => 'Pegawai',
-        'link' => 'index.php?page=pegawai',
-        'active' => $current_page == 'pegawai'
+        'link' => 'index.php?page=data_pegawai',
+       'active' => $current_page == 'data_pegawai' ||
+            basename($_SERVER['PHP_SELF']) == 'tambah_pegawai.php' ||
+            basename($_SERVER['PHP_SELF']) == 'edit_pegawai.php' ||
+                        basename($_SERVER['PHP_SELF']) == 'detail_pegawai.php'
+
     ),
     'kategori' => array(
         'icon' => 'fas fa-tags',
@@ -46,6 +49,7 @@ $menu_items = array(
         'link' => 'index.php?page=pengaturan',
         'active' => $current_page == 'pengaturan'
     ),
+    
 );
 ?>
 
