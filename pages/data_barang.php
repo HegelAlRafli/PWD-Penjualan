@@ -82,8 +82,8 @@
                                    onclick="return confirm('Yakin hapus barang ini?')">
                                     <i class="fas fa-trash"></i>
                                 </a>
-                                <a href="#" class="btn-action btn-view" title="Detail">
-                                    <i class="fas fa-eye"></i>
+                                <a href="detail_barang.php?id=<?php echo $row['id']; ?>" class="btn-action btn-view" title="Detail">
+                                <i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
