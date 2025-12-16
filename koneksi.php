@@ -1,6 +1,6 @@
 <?php
 // Koneksi server
-$host     = "localhost";
+$host     = "localhost:3307";
 $username = "root";   // user database
 $password = "";            // password database
 $database = "a122407296_db_barang"; // nama database

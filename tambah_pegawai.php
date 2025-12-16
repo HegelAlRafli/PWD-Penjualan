@@ -7,10 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ambil data input
     $id_pegawai     = clean_input($_POST['id_pegawai']);
     $nama           = clean_input($_POST['nama']);
+    $jenis_kelamin  = clean_input($_POST['jenis_kelamin']);
     $email          = clean_input($_POST['email']);
     $no_telepon     = clean_input($_POST['no_telepon']);
     $jabatan        = clean_input($_POST['jabatan']);
     $gaji           = clean_input($_POST['gaji']);
+    $status_kawin = clean_input($_POST['status_kawin']);
     $tanggal_masuk  = clean_input($_POST['tanggal_masuk']);
     $status_aktif   = clean_input($_POST['status_aktif']);
 
@@ -57,8 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['tipe'] = "error";
     } else {
         // Query Insert
-        $query = "INSERT INTO pegawai (id_pegawai, nama, email, no_telepon, foto_profil, jabatan, gaji, tanggal_masuk, status_aktif) 
-                  VALUES ('$id_pegawai', '$nama', '$email', '$no_telepon', '$foto_nama', '$jabatan', '$gaji', '$tanggal_masuk', '$status_aktif')";
+        $query = "INSERT INTO pegawai (
+            id_pegawai, nama, jenis_kelamin, email, no_telepon,
+            foto_profil, jabatan, gaji, tanggal_masuk, status_kawin, status_aktif
+        ) VALUES (
+            '$id_pegawai', '$nama', '$jenis_kelamin', '$email', '$no_telepon',
+            '$foto_nama', '$jabatan', '$gaji', '$tanggal_masuk', '$status_kawin', '$status_aktif'
+        )";
 
         if (mysqli_query($koneksi, $query)) {
             $_SESSION['pesan'] = "Pegawai berhasil ditambahkan!";
@@ -118,7 +125,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" id="nama" name="nama" required placeholder="Nama lengkap pegawai">
                             </div>
                         </div>
-
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jenis_kelamin">
+                                    <i class="fas fa-venus-mars"></i> Jenis Kelamin *
+                                </label>
+                                <select id="jenis_kelamin" name="jenis_kelamin" required>
+                                    <option value="">Pilih Jenis Kelamin</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Custom">Custom</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">
@@ -179,6 +198,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </select>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="status_nikah">
+                                    <i class="fas fa-ring"></i> Status Kawin *
+                                </label>
+                                <select id="status_kawin" name="status_kawin" required>
+                                    <option value="">Pilih Status Kawin</option>
+                                    <option value="Belum Menikah">Belum Pernah</option>
+                                    <option value="Menikah">Pernah</option>
+                                    <option value="Rahasia">Rahasia 😘😘😘</option>
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="foto_profil">

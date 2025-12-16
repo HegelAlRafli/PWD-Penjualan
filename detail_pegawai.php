@@ -1,23 +1,21 @@
 <?php
-    include 'koneksi.php';
+include 'koneksi.php';
 
-    $page_title = "Detail Pegawai";
+$page_title = "Detail Pegawai";
 
-    // Ambil ID dari URL (menggunakan parameter 'id')
-    $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+// Ambil ID dari URL (STRING)
+$id = isset($_GET['id']) ? mysqli_real_escape_string($koneksi, $_GET['id']) : '';
 
-    // Ambil data pegawai berdasarkan id_pegawai
-    // Asumsi: Primary key di database adalah 'id_pegawai'
-    $query = "SELECT * FROM pegawai WHERE id_pegawai = $id";
-    $result = mysqli_query($koneksi, $query);
-    $pegawai = mysqli_fetch_assoc($result);
+$query = "SELECT * FROM pegawai WHERE id_pegawai = '$id'";
+$result = mysqli_query($koneksi, $query);
+$pegawai = mysqli_fetch_assoc($result);
 
-    if (!$pegawai) {
-        $_SESSION['pesan'] = "Data pegawai tidak ditemukan!";
-        $_SESSION['tipe'] = "error";
-        header("Location: index.php?page=detail_pegawai");
-        exit();
-    }
+if (!$pegawai) {
+    $_SESSION['pesan'] = "Data pegawai tidak ditemukan!";
+    $_SESSION['tipe'] = "error";
+    header("Location: index.php?page=data_pegawai");
+    exit();
+}
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -41,22 +39,22 @@
             <div class="card">
                 <div class="card-body">
                     <form class="form-vertical">
-                        
+
                         <div class="form-group" style="text-align: center; margin-bottom: 30px;">
                             <label style="display:block; font-weight:bold;">Foto Profil</label>
-                            <?php 
-                                $fotoPath = !empty($pegawai['foto_profil']) ? 'uploads/' . $pegawai['foto_profil'] : '';
-                                
-                                // Cek apakah file ada atau kosong
-                                if (!file_exists($fotoPath) || empty($pegawai['foto_profil'])) {
-                                     // Placeholder user icon jika foto kosong
-                                     $src = 'https://via.placeholder.com/150?text=No+Profile';
-                                } else {
-                                     $src = $fotoPath;
-                                }
+                            <?php
+                            $fotoPath = !empty($pegawai['foto_profil']) ? 'uploads/' . $pegawai['foto_profil'] : '';
+
+                            // Cek apakah file ada atau kosong
+                            if (!file_exists($fotoPath) || empty($pegawai['foto_profil'])) {
+                                // Placeholder user icon jika foto kosong
+                                $src = 'https://via.placeholder.com/150?text=No+Profile';
+                            } else {
+                                $src = $fotoPath;
+                            }
                             ?>
-                            <img src="<?php echo $src; ?>" alt="Foto Profil" 
-                                 style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd; padding: 5px; border-radius: 50%;">
+                            <img src="<?php echo $src; ?>" alt="Foto Profil"
+                                style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd; padding: 5px; border-radius: 50%;">
                         </div>
 
                         <div class="form-group">
@@ -101,16 +99,40 @@
 
                             <div class="form-group" style="flex: 1;">
                                 <label><i class="fas fa-info-circle"></i> Status Aktif</label>
-                                <?php 
-                                    // Logika warna status
-                                    $statusLabel = ucfirst($pegawai['status_aktif']); // Aktif / Tidak aktif
-                                    $statusColor = (strtolower($pegawai['status_aktif']) == 'aktif' || $pegawai['status_aktif'] == 1) ? 'green' : 'red';
+                                <?php
+                                // Logika warna status
+                                $statusLabel = ucfirst($pegawai['status_aktif']); // Aktif / Tidak aktif
+                                $statusColor = (strtolower($pegawai['status_aktif']) == 'aktif' || $pegawai['status_aktif'] == 1) ? 'green' : 'red';
                                 ?>
-                                <input type="text" disabled 
+                                <input type="text" disabled
                                     value="<?php echo $statusLabel; ?>"
                                     style="font-weight: bold; color: <?php echo $statusColor; ?>;">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-heart"></i> Status Kawin</label>
+
+                            <?php
+                            $status_kawin = $pegawai['status_kawin'] ?? '-';
+
+                            if ($status_kawin == 'Belum Pernah') {
+                                $warna = '#0d6efd';
+                            } elseif ($status_kawin == 'Pernah') {
+                                $warna = '#198754';
+                            } elseif ($status_kawin == 'Rahasia') {
+                                $warna = '#6f42c1';
+                            } else {
+                                $warna = '#6c757d';
+                            }
+                            ?>
+
+                            <input type="text"
+                                disabled
+                                value="<?php echo htmlspecialchars($status_kawin); ?>"
+                                style="font-weight:bold;color:<?php echo $warna; ?>;">
+                        </div>
+
+
 
                         <div class="card-header" style="background-color: #f8f9fa; border-top: 1px solid #ddd; padding: 15px;">
                             <a href="index.php?page=pegawai" class="btn btn-secondary">

@@ -28,6 +28,39 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+/* ===== FIX FINAL STATUS KAWIN ===== */
+
+.form-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+/* Radio group */
+.radio-group {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+/* Item radio */
+.radio-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Radio input */
+.radio-item input {
+    margin: 0;
+    position: static;
+    accent-color: #007bff;
+}
 
 .header-left {
     display: flex;
