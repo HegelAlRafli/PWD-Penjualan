@@ -1,9 +1,9 @@
 <?php
 // Koneksi server
-$host     = "localhost:3307";
+$host     = "localhost";
 $username = "root";   // user database
 $password = "";            // password database
-$database = "a122407296_db_barang"; // nama database
+$database = "a122407296_db_barangg"; // nama database
 
 
 function clean_input($data) {

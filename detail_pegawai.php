@@ -49,12 +49,21 @@ if (!$pegawai) {
                             if (!file_exists($fotoPath) || empty($pegawai['foto_profil'])) {
                                 // Placeholder user icon jika foto kosong
                                 $src = 'https://via.placeholder.com/150?text=No+Profile';
+                                $onclick = ''; // Tidak ada fungsi klik
+                                $cursor = 'default';
                             } else {
                                 $src = $fotoPath;
+                                $onclick = 'onclick="openModal(this)"'; // Panggil fungsi JS
+                                $cursor = 'pointer';
                             }
                             ?>
-                            <img src="<?php echo $src; ?>" alt="Foto Profil"
-                                style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd; padding: 5px; border-radius: 50%;">
+                            
+                            <img src="<?php echo $src; ?>" alt="Foto Profil" <?php echo $onclick; ?>
+                                style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd; padding: 5px; border-radius: 50%; cursor: <?php echo $cursor; ?>; transition: 0.3s;">
+
+                            <?php if (!empty($pegawai['foto_profil']) && file_exists($fotoPath)) : ?>
+                                <p class="text-muted" style="font-size: 12px; margin-top: 5px;">Klik gambar untuk memperbesar</p>
+                            <?php endif; ?>
                         </div>
 
                         <div class="form-group">
@@ -148,5 +157,127 @@ if (!$pegawai) {
         </div>
     </main>
 </div>
+
+<div id="myImageModal" class="image-modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content-img" id="img01">
+    <div id="caption"></div>
+</div>
+
+<style>
+    /* Style untuk Modal Latar Belakang */
+    .image-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        padding-top: 50px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.85); /* Hitam transparan */
+    }
+
+    /* Style Gambar di dalam Modal */
+    .modal-content-img {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        max-height: 85vh; /* Agar tidak kepanjangan di layar */
+        object-fit: contain;
+    }
+
+    /* Style Caption */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+
+    /* Animasi Zoom In */
+    .modal-content-img,
+    #caption {
+        -webkit-animation-name: zoom;
+        animation-name: zoom;
+    }
+
+    @-webkit-keyframes zoom {
+        from { -webkit-transform: scale(0) }
+        to { -webkit-transform: scale(1) }
+    }
+
+    @keyframes zoom {
+        from { transform: scale(0) }
+        to { transform: scale(1) }
+    }
+
+    /* Tombol Close (X) */
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .close-modal:hover,
+    .close-modal:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Responsif Mobile */
+    @media only screen and (max-width: 700px) {
+        .modal-content-img {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    // Ambil elemen modal
+    var modal = document.getElementById("myImageModal");
+
+    // Ambil elemen gambar di dalam modal & caption
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+
+    // Fungsi membuka modal (dipanggil saat gambar diklik)
+    function openModal(element) {
+        modal.style.display = "block";
+        modalImg.src = element.src; 
+        captionText.innerHTML = element.alt; 
+    }
+
+    // Fungsi menutup modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Tutup jika user klik area gelap (background)
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Tutup jika tombol ESC ditekan
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            modal.style.display = "none";
+        }
+    });
+</script>
 
 <?php include 'includes/footer.php'; ?>
