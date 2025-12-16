@@ -1,8 +1,8 @@
 <?php
 // Koneksi server
-$host     = "192.168.10.252";
-$username = "a122407296_user_barang";   // user database
-$password = "barang123";            // password database
+$host     = "localhost";
+$username = "root";   // user database
+$password = "";            // password database
 $database = "a122407296_db_barang"; // nama database
 
 

@@ -27,8 +27,8 @@
             <table class="data-table">
             <thead>
                     <tr>
-                        <th>Kode Barang</th>
-                        <th >No</th>                        
+                        <th>No</th>
+                        <th >Kode Barang</th>                        
                         <th >Foto</th>
                         <th>Nama Barang</th>
                         <th>Stok</th>
@@ -83,7 +83,7 @@
                                     <i class="fas fa-trash"></i>
                                 </a>
                                 <a href="detail_barang.php?id=<?php echo $row['id']; ?>" class="btn-action btn-view" title="Detail">
-                                <i class="fas fa-eye"></i>
+                                    <i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>

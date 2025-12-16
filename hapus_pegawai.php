@@ -16,5 +16,5 @@ if ($id > 0) {
     }
 }
 
-header("Location: index.php?page=pegawai");
+header("Location: index.php?page=data_pegawai");
 exit();
