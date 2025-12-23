@@ -203,12 +203,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label for="status_nikah">
                                     <i class="fas fa-ring"></i> Status Kawin *
                                 </label>
-                                <select id="status_kawin" name="status_kawin" required>
-                                    <option value="">Pilih Status Kawin</option>
-                                    <option value="Belum Menikah">Belum Pernah</option>
-                                    <option value="Menikah">Pernah</option>
-                                    <option value="Rahasia">Rahasia 😘😘😘</option>
-                                </select>
+                              
+                        <select id="status_kawin" name="status_kawin" required>
+        <option value="">Pilih Status Kawin</option>
+    <option value="Belum Pernah">Belum Pernah</option> 
+    
+    <option value="Pernah">Pernah</option> 
+    
+    <option value="Rahasia">Rahasia 😘😘😘</option>
+</select>
                             </div>
                         </div>
 

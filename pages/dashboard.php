@@ -49,11 +49,11 @@ include 'koneksi.php';
                     </form>
                 
                 </div>
-                    <div class="card-header">
+                    <!-- <div class="card-header">
                     <a href="index.php?page=data_barang" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Kembali
                     </a>
-                </div>    
+                </div>     -->
             </div>
         </div>
     </main>
