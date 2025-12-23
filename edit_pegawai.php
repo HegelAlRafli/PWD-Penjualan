@@ -27,11 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ambil input form
     $id_pegawai_baru = clean_input($_POST['id_pegawai']); // Jika ID boleh diedit
     $nama           = clean_input($_POST['nama']);
+    $jenis_kelamin = clean_input($_POST['jenis_kelamin']);
     $email          = clean_input($_POST['email']);
     $no_telepon     = clean_input($_POST['no_telepon']);
     $jabatan        = clean_input($_POST['jabatan']);
     $gaji           = clean_input($_POST['gaji']);
     $tanggal_masuk  = clean_input($_POST['tanggal_masuk']);
+    $status_kawin = clean_input($_POST['status_kawin']);
     $status_aktif   = clean_input($_POST['status_aktif']);
 
     // Cek duplikasi ID jika ID diubah (Opsional, jika ID boleh diedit)
@@ -64,16 +66,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // -------------------------
 
         $query = "UPDATE pegawai SET 
-                  id_pegawai = '$id_pegawai_baru',
-                  nama = '$nama',
-                  email = '$email',
-                  no_telepon = '$no_telepon',
-                  foto_profil = '$foto_nama',
-                  jabatan = '$jabatan',
-                  gaji = '$gaji',
-                  tanggal_masuk = '$tanggal_masuk',
-                  status_aktif = '$status_aktif'
-                  WHERE id_pegawai = '$id'";
+        id_pegawai = '$id_pegawai_baru',
+        nama = '$nama',
+        jenis_kelamin = '$jenis_kelamin',
+        email = '$email',
+        no_telepon = '$no_telepon',
+        foto_profil = '$foto_nama',
+        jabatan = '$jabatan',
+        gaji = '$gaji',
+        tanggal_masuk = '$tanggal_masuk',
+        status_kawin = '$status_kawin',
+        status_aktif = '$status_aktif'
+         WHERE id_pegawai = '$id'";
+
 
         if (mysqli_query($koneksi, $query)) {
             $_SESSION['pesan'] = "Data pegawai berhasil diperbarui!";
@@ -135,6 +140,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     value="<?php echo htmlspecialchars($pegawai['nama']); ?>" required>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="jenis_kelamin">
+                                <i class="fas fa-venus-mars"></i> Jenis Kelamin *
+                            </label>
+                            <select id="jenis_kelamin" name="jenis_kelamin" required>
+                                <option value="Laki-laki" <?= $pegawai['jenis_kelamin'] == 'Laki-laki' ? 'selected' : ''; ?>>Laki-laki</option>
+                                <option value="Perempuan" <?= $pegawai['jenis_kelamin'] == 'Perempuan' ? 'selected' : ''; ?>>Perempuan</option>
+                                <option value="Custom" <?= $pegawai['jenis_kelamin'] == 'Custom' ? 'selected' : ''; ?>>Custom</option>
+                            </select>
+                        </div>
 
                         <div class="form-row">
                             <div class="form-group">
@@ -188,6 +203,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="date" id="tanggal_masuk" name="tanggal_masuk"
                                     value="<?php echo $pegawai['tanggal_masuk']; ?>" required>
                             </div>
+                            <div class="form-group">
+                                <label for="status_kawin">
+                                    <i class="fas fa-heart"></i> Status Kawin *
+                                </label>
+                                <select id="status_kawin" name="status_kawin" required>
+                                    <option value="">Pilih Status Kawin</option>
+
+                                    <option value="Belum Pernah"
+                                        <?= (($pegawai['status_kawin'] ?? '') == 'Belum Pernah') ? 'selected' : ''; ?>>
+                                        Belum Pernah
+                                    </option>
+
+                                    <option value="Pernah"
+                                        <?= (($pegawai['status_kawin'] ?? '') == 'Pernah') ? 'selected' : ''; ?>>
+                                        Pernah
+                                    </option>
+
+                                    <option value="Rahasia"
+                                        <?= (($pegawai['status_kawin'] ?? '') == 'Rahasia') ? 'selected' : ''; ?>>
+                                        Rahasia 😘😘😘
+                                    </option>
+                                </select>
+
+                            </div>
+
 
                             <div class="form-group">
                                 <label for="status_aktif">
@@ -208,9 +248,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </label>
                             <div style="margin-bottom: 10px;">
                                 <?php if (!empty($pegawai['foto_profil'])): ?>
-                                <img src="uploads/<?php echo $pegawai['foto_profil']; ?>" alt="Foto Lama" width="100"
-                                    class="img-thumbnail">
-                                <br><small>Foto saat ini</small>
+                                    <img src="uploads/<?php echo $pegawai['foto_profil']; ?>" alt="Foto Lama" width="100"
+                                        class="img-thumbnail">
+                                    <br><small>Foto saat ini</small>
                                 <?php endif; ?>
                             </div>
                             <input type="file" id="foto_profil" name="foto_profil" accept="image/*">

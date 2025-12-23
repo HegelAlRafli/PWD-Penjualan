@@ -1,20 +1,60 @@
 <?php
     // Query data barang
     if (!isset($koneksi)) {
-        include 'koneksi.php'; // Cukup panggil langsung
+        include 'koneksi.php';
     }
     $query = "SELECT * FROM barang ORDER BY id DESC";
     $result = mysqli_query($koneksi, $query);
 ?>
 
+<style>
+    /* Styling Search Bar (Sama seperti Data Pegawai) */
+    .search-wrapper {
+        position: relative;
+        margin-right: 15px;
+    }
+
+    .search-input {
+        padding: 8px 15px 8px 40px; /* Padding kiri besar untuk icon */
+        border: 1px solid #ddd;
+        border-radius: 50px;       /* Bentuk Pill */
+        width: 250px;
+        transition: all 0.3s ease;
+        outline: none;
+        background-color: #fafafa;
+    }
+
+    .search-input:focus {
+        border-color: #4e73df;
+        background-color: #fff;
+        box-shadow: 0 0 8px rgba(78, 115, 223, 0.2);
+        width: 280px; /* Efek melebar */
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #aaa;
+        pointer-events: none;
+    }
+</style>
+
 <div class="card">
     <div class="card-header">
         <h3>DATA BARANG</h3>
-        <div class="card-actions">
+        <div class="card-actions" style="display: flex; align-items: center;">
+            
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInputBarang" class="search-input" placeholder="Cari kode, nama barang...">
+            </div>
+
             <a href="tambah.php" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah Barang
             </a>
-            <button class="btn btn-secondary" onclick="window.print()">
+            <button class="btn btn-secondary" onclick="window.print()" style="margin-left: 5px;">
                 <i class="fas fa-print"></i> Cetak
             </button>
         </div>
@@ -22,14 +62,13 @@
     
     <div class="card-body">
                 
-        <!-- Tabel Data Barang -->
         <div class="table-container">
-            <table class="data-table">
+            <table class="data-table" id="tableBarang">
             <thead>
                     <tr>
-                        <th>No</th>
-                        <th >Kode Barang</th>                        
-                        <th >Foto</th>
+                        <th width="5%">No</th>
+                        <th>Kode Barang</th>                        
+                        <th>Foto</th>
                         <th>Nama Barang</th>
                         <th>Stok</th>
                         <th>Harga</th>
@@ -40,7 +79,7 @@
                 <tbody>
                     <?php if(mysqli_num_rows($result) > 0): ?>
                         <?php $no = 1; while($row = mysqli_fetch_assoc($result)): ?>
-                        <tr>
+                        <tr class="data-row">
                             <td><?php echo $no++; ?></td>
                             <td>
                                 <strong><?php echo htmlspecialchars($row['kode_barang']); ?></strong>
@@ -88,6 +127,14 @@
                             </td>
                         </tr>
                         <?php endwhile; ?>
+
+                        <tr id="noDataRow" style="display: none;">
+                            <td colspan="8" class="text-center" style="padding: 20px; color: #666;">
+                                <i class="fas fa-search" style="font-size: 20px; color: #ccc; margin-bottom: 5px; display:block;"></i>
+                                Data barang tidak ditemukan
+                            </td>
+                        </tr>
+
                     <?php else: ?>
                         <tr>
                             <td colspan="8" class="text-center">
@@ -107,3 +154,31 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('searchInputBarang').addEventListener('keyup', function() {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll('#tableBarang tbody .data-row'); // Target baris data
+    let noDataRow = document.getElementById('noDataRow');
+    let hasVisibleRow = false;
+
+    rows.forEach(row => {
+        let text = row.textContent.toLowerCase();
+        if(text.includes(filter)) {
+            row.style.display = ''; // Tampilkan    
+            hasVisibleRow = true;
+        } else {
+            row.style.display = 'none'; // Sembunyikan
+        }
+    });
+
+    // Tampilkan pesan "Tidak ditemukan" jika hasil kosong
+    if (noDataRow) {
+        if (!hasVisibleRow && filter !== '') {
+            noDataRow.style.display = '';
+        } else {
+            noDataRow.style.display = 'none';
+        }
+    }
+});
+</script>

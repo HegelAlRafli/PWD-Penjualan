@@ -16,7 +16,7 @@
         $_SESSION['tipe'] = "error";
         header("Location: index.php?page=data_barang");
         exit();
-    }
+    }   
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $kode_barang = clean_input($_POST['kode_barang']);
