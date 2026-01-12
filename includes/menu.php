@@ -38,25 +38,25 @@ $menu_items = array(
             basename($_SERVER['PHP_SELF']) == 'edit_supplier.php' ||
             basename($_SERVER['PHP_SELF']) == 'detail_supplier.php'
     ),
-    // ------------------------------
-    'kategori' => array(
-        'icon' => 'fas fa-tags',
-        'title' => 'Kategori',
-        'link' => 'index.php?page=kategori',
-        'active' => $current_page == 'kategori'
-    ),
-    'laporan' => array(
-        'icon' => 'fas fa-chart-bar',
-        'title' => 'Laporan',
-        'link' => 'index.php?page=laporan',
-        'active' => $current_page == 'laporan'
-    ),
-    'pengaturan' => array(
-        'icon' => 'fas fa-cog',
-        'title' => 'Pengaturan',
-        'link' => 'index.php?page=pengaturan',
-        'active' => $current_page == 'pengaturan'
-    ),
+    // // ------------------------------
+    // 'kategori' => array(
+    //     'icon' => 'fas fa-tags',
+    //     'title' => 'Kategori',
+    //     'link' => 'index.php?page=kategori',
+    //     'active' => $current_page == 'kategori'
+    // ),
+    // 'laporan' => array(
+    //     'icon' => 'fas fa-chart-bar',
+    //     'title' => 'Laporan',
+    //     'link' => 'index.php?page=laporan',
+    //     'active' => $current_page == 'laporan'
+    // ),
+    // 'pengaturan' => array(
+    //     'icon' => 'fas fa-cog',
+    //     'title' => 'Pengaturan',
+    //     'link' => 'index.php?page=pengaturan',
+    //     'active' => $current_page == 'pengaturan'
+    // ),
 );
 ?>
 
@@ -75,7 +75,7 @@ $menu_items = array(
 
         <ul class="logout-menu">
             <li>
-                <a style="color: red;" href="login.php" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+                <a style="color: red;" href="logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>

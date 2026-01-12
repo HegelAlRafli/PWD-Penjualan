@@ -1,8 +1,13 @@
 <?php
-// Set judul halaman
-$page_title = "Dashboard";
+session_start();
 
-// Ambil parameter page
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "login") {
+    header("Location: login.php");
+    exit();
+}
+
+include_once 'koneksi.php';
+
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 ?>
 
@@ -12,16 +17,17 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
     <?php include 'includes/menu.php'; ?>
 
     <main class="main-content">
+        <!-- Page Header -->
         <div class="page-header">
             <?php
             $page_titles = array(
-                'dashboard'     => 'Dashboard',
-                'data_barang'   => 'Data Barang',
-                'data_pegawai'  => 'Pegawai',
-                'data_supplier' => 'Data Supplier', // <--- 1. Tambahkan Judul Halaman
-                'kategori'      => 'Kategori Barang',
-                'laporan'       => 'Laporan',
-                'pengaturan'    => 'Pengaturan Sistem',
+                'dashboard' => 'Dashboard',
+                'data_barang' => 'Data Barang',
+                'data_pegawai' => 'Pegawai',
+                'kategori' => 'Kategori Barang',
+                'laporan' => 'Laporan',
+                'pengaturan' => 'Pengaturan Sistem',
+
             );
             ?>
             <h2><?php echo $page_titles[$page] ?? 'Dashboard'; ?></h2>
@@ -32,6 +38,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             </div>
         </div>
 
+        <!-- Konten Utama -->
         <div class="content">
             <?php
             // Load konten berdasarkan halaman
@@ -44,9 +51,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                     break;
                 case 'data_pegawai':
                     include 'pages/pegawai.php';
-                    break;
-                case 'data_supplier': // <--- 2. Tambahkan Case untuk Supplier
-                    include 'pages/suppliers.php';
                     break;
                 case 'kategori':
                     include 'pages/kategori.php';

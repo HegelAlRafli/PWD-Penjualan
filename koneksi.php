@@ -1,18 +1,19 @@
 <?php
 // Koneksi server
-$host     = "";
+$host     = "localhost";
 $username = "root";   // user database
-$password = "";            // password database
+$password = "";       // password database
 $database = "pwd_penjualan"; // nama database
 
-
-function clean_input($data)
-{
-    global $koneksi;
-    $data = trim($data);
-    $data = mysqli_real_escape_string($koneksi, $data);
-    $data = htmlspecialchars($data);
-    return $data;
+if (!function_exists('clean_input')) {
+    function clean_input($data)
+    {
+        global $koneksi;
+        $data = trim($data);
+        $data = mysqli_real_escape_string($koneksi, $data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 }
 
 // Membuat koneksi
