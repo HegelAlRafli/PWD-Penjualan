@@ -24,9 +24,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 'dashboard' => 'Dashboard',
                 'data_barang' => 'Data Barang',
                 'data_pegawai' => 'Pegawai',
-                'kategori' => 'Kategori Barang',
-                'laporan' => 'Laporan',
-                'pengaturan' => 'Pengaturan Sistem',
+                'data_supplier' => 'Data Supplier', // <--- 1. Tambahkan Judul Halaman
+
 
             );
             ?>
@@ -52,14 +51,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                 case 'data_pegawai':
                     include 'pages/pegawai.php';
                     break;
-                case 'kategori':
-                    include 'pages/kategori.php';
-                    break;
-                case 'laporan':
-                    include 'pages/laporan.php';
-                    break;
-                case 'pengaturan':
-                    include 'pages/pengaturan.php';
+                case 'data_supplier':
+                    include 'pages/suppliers.php';
                     break;
 
                 default:
