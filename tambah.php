@@ -10,30 +10,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stok        = clean_input($_POST['stok']);
     $harga       = clean_input($_POST['harga']);
     $deskripsi   = clean_input($_POST['deskripsi']);
-    
+    $status = isset($_POST['status']) ? clean_input($_POST['status']) : 'aktif';
+
+
     // --- LOGIKA UPLOAD FOTO (YANG DIPERBAIKI) ---
     $foto = 'default_barang.jpg'; // Nama default jika tidak ada upload
-    
+
     // Cek apakah ada file foto yang dikirim dan tidak error
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
         $allowed    = array('jpg', 'jpeg', 'png', 'gif');
         $filename   = $_FILES['foto']['name'];
         $ext        = pathinfo($filename, PATHINFO_EXTENSION);
-        
+
         // Validasi Ekstensi
         if (in_array(strtolower($ext), $allowed)) {
             // Tentukan folder tujuan (Naik 2 level dari pages/data_barang/ ke root/uploads/)
             $target_dir = "uploads/";
-            
+
             // Cek apakah folder uploads ada, jika tidak buat dulu
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
-            
+
             // Buat nama baru yang unik
             $new_filename = "barang_" . time() . "." . $ext;
             $target_file  = $target_dir . $new_filename;
-            
+
             // PINDAHKAN FILE
             if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
                 $foto = $new_filename; // Berhasil! Update variabel $foto
@@ -67,7 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Query Insert (Pastikan variabel $foto masuk ke sini)
         $query = "INSERT INTO barang (kode_barang, foto, nama_barang, kategori, stok, harga, deskripsi, status) 
-                  VALUES ('$kode_barang', '$foto', '$nama_barang', '$kategori', '$stok', '$harga', '$deskripsi', 'aktif')";
+VALUES ('$kode_barang', '$foto', '$nama_barang', '$kategori', '$stok', '$harga', '$deskripsi', '$status')
+";
 
         if (mysqli_query($koneksi, $query)) {
             $_SESSION['pesan'] = "Barang berhasil ditambahkan!";
@@ -109,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <div class="card-body">
-                <form method="POST" class="form-vertical" enctype="multipart/form-data">
+                    <form method="POST" class="form-vertical" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="kode_barang">
@@ -141,8 +144,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <option value="Minuman">Minuman</option>
                                     <option value="Alat Tulis">Alat Tulis</option>
                                     <option value="Olahraga">Olahraga</option>
-                                                                        <option value="Alustista">Alustista</option>
-                                                                        <option value="Alat Tempur">Alat Tempur 😘</option>
+                                    <option value="Alustista">Alustista</option>
+                                    <option value="Alat Tempur">Alat Tempur 😘</option>
 
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
@@ -162,6 +165,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="number" id="harga" name="harga" min="0" required>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="status">
+                                <i class="fas fa-toggle-on"></i> Status Barang *
+                            </label>
+                            <select id="status" name="status" required>
+                                <option value="aktif" selected>Aktif</option>
+                                <option value="nonaktif">Nonaktif</option>
+                            </select>
+                            <small class="form-hint">Barang nonaktif tidak akan tampil di penjualan</small>
+                        </div>
+
                         <div class="form-group">
                             <label for="foto"><i class="fas fa-image"></i> Foto Barang</label>
                             <input type="file" id="foto" name="foto" class="form-control-file" accept="image/*">

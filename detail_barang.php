@@ -60,9 +60,10 @@ if (!$barang) {
 
                             <img src="<?php echo $src; ?>" alt="Foto Barang" <?php echo $onclick; ?>
                                 style="max-width: 200px; height: auto; border: 1px solid #ddd; padding: 5px; border-radius: 5px; cursor: <?php echo $cursor; ?>; transition: 0.3s;">
-                            
+
                             <?php if (!empty($barang['foto']) && file_exists($fotoPath)) : ?>
-                                <p class="text-muted" style="font-size: 12px; margin-top: 5px;">Klik gambar untuk melihat ukuran penuh</p>
+                                <p class="text-muted" style="font-size: 12px; margin-top: 5px;">Klik gambar untuk melihat
+                                    ukuran penuh</p>
                             <?php endif; ?>
                         </div>
 
@@ -74,12 +75,14 @@ if (!$barang) {
                         <div class="form-row">
                             <div class="form-group" style="flex: 1; margin-right: 10px;">
                                 <label><i class="fas fa-barcode"></i> Kode Barang</label>
-                                <input type="text" disabled value="<?php echo htmlspecialchars($barang['kode_barang']); ?>">
+                                <input type="text" disabled
+                                    value="<?php echo htmlspecialchars($barang['kode_barang']); ?>">
                             </div>
 
                             <div class="form-group" style="flex: 1;">
                                 <label><i class="fas fa-tag"></i> Kategori</label>
-                                <input type="text" disabled value="<?php echo htmlspecialchars($barang['kategori']); ?>">
+                                <input type="text" disabled
+                                    value="<?php echo htmlspecialchars($barang['kategori']); ?>">
                             </div>
                         </div>
 
@@ -96,14 +99,14 @@ if (!$barang) {
 
                             <div class="form-group" style="flex: 1;">
                                 <label><i class="fas fa-money-bill-wave"></i> Harga (Rp)</label>
-                                <input type="text" disabled value="Rp <?php echo number_format($barang['harga'], 0, ',', '.'); ?>">
+                                <input type="text" disabled
+                                    value="Rp <?php echo number_format($barang['harga'], 0, ',', '.'); ?>">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label><i class="fas fa-info-circle"></i> Status</label>
-                            <input type="text" disabled
-                                value="<?php echo ucfirst($barang['status']); ?>"
+                            <input type="text" disabled value="<?php echo ucfirst($barang['status']); ?>"
                                 style="font-weight: bold; color: <?php echo ($barang['status'] == 'aktif') ? 'green' : 'red'; ?>;">
                         </div>
 
@@ -112,12 +115,14 @@ if (!$barang) {
                             <textarea rows="4" disabled><?php echo htmlspecialchars($barang['deskripsi']); ?></textarea>
                         </div>
 
-                        <div class="card-header" style="background-color: #f8f9fa; border-top: 1px solid #ddd; padding: 15px;">
+                        <div class="card-header"
+                            style="background-color: #f8f9fa; border-top: 1px solid #ddd; padding: 15px;">
                             <a href="index.php?page=data_barang" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
 
-                            <a href="edit.php?id=<?php echo $barang['id']; ?>" class="btn btn-primary" style="margin-left: 10px;">
+                            <a href="edit.php?id=<?php echo $barang['id']; ?>" class="btn btn-primary"
+                                style="margin-left: 10px;">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                         </div>
@@ -138,16 +143,20 @@ if (!$barang) {
 <style>
     /* Memaksa Modal agar melayang (Popup) */
     .image-modal {
-        display: none; /* Wajib hidden dulu */
-        position: fixed; /* Wajib fixed agar melayang */
-        z-index: 9999; /* Agar berada paling depan */
+        display: none;
+        /* Wajib hidden dulu */
+        position: fixed;
+        /* Wajib fixed agar melayang */
+        z-index: 9999;
+        /* Agar berada paling depan */
         padding-top: 50px;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: rgba(0, 0, 0, 0.85); /* Latar belakang agak gelap */
+        background-color: rgba(0, 0, 0, 0.85);
+        /* Latar belakang agak gelap */
     }
 
     .modal-content-img {
@@ -155,7 +164,8 @@ if (!$barang) {
         display: block;
         width: 80%;
         max-width: 700px;
-        max-height: 85vh; /* Dibatasi agar tidak terlalu tinggi */
+        max-height: 85vh;
+        /* Dibatasi agar tidak terlalu tinggi */
         object-fit: contain;
     }
 
@@ -178,13 +188,23 @@ if (!$barang) {
     }
 
     @-webkit-keyframes zoom {
-        from { -webkit-transform: scale(0) }
-        to { -webkit-transform: scale(1) }
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
     }
 
     @keyframes zoom {
-        from { transform: scale(0) }
-        to { transform: scale(1) }
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
     }
 
     .close-modal {
@@ -248,4 +268,4 @@ if (!$barang) {
     });
 </script>
 
-<?php include 'includes/footer.php'; ?> 
+<?php include 'includes/footer.php'; ?>
