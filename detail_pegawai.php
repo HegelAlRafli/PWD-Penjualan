@@ -57,18 +57,20 @@ if (!$pegawai) {
                                 $cursor = 'pointer';
                             }
                             ?>
-                            
+
                             <img src="<?php echo $src; ?>" alt="Foto Profil" <?php echo $onclick; ?>
                                 style="width: 150px; height: 150px; object-fit: cover; border: 1px solid #ddd; padding: 5px; border-radius: 50%; cursor: <?php echo $cursor; ?>; transition: 0.3s;">
 
                             <?php if (!empty($pegawai['foto_profil']) && file_exists($fotoPath)) : ?>
-                                <p class="text-muted" style="font-size: 12px; margin-top: 5px;">Klik gambar untuk memperbesar</p>
+                                <p class="text-muted" style="font-size: 12px; margin-top: 5px;">Klik gambar untuk
+                                    memperbesar</p>
                             <?php endif; ?>
                         </div>
 
                         <div class="form-group">
                             <label for="id_pegawai">ID Pegawai</label>
-                            <input type="text" class="form-control" disabled value="<?php echo $pegawai['id_pegawai']; ?>">
+                            <input type="text" class="form-control" disabled
+                                value="<?php echo $pegawai['id_pegawai']; ?>">
                         </div>
 
                         <div class="form-group">
@@ -84,26 +86,30 @@ if (!$pegawai) {
 
                             <div class="form-group" style="flex: 1;">
                                 <label><i class="fas fa-phone"></i> No Telepon</label>
-                                <input type="text" disabled value="<?php echo htmlspecialchars($pegawai['no_telepon']); ?>">
+                                <input type="text" disabled
+                                    value="<?php echo htmlspecialchars($pegawai['no_telepon']); ?>">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group" style="flex: 1; margin-right: 10px;">
                                 <label><i class="fas fa-briefcase"></i> Jabatan</label>
-                                <input type="text" disabled value="<?php echo htmlspecialchars($pegawai['jabatan']); ?>">
+                                <input type="text" disabled
+                                    value="<?php echo htmlspecialchars($pegawai['jabatan']); ?>">
                             </div>
 
                             <div class="form-group" style="flex: 1;">
                                 <label><i class="fas fa-money-bill-wave"></i> Gaji (Rp)</label>
-                                <input type="text" disabled value="Rp <?php echo number_format($pegawai['gaji'], 0, ',', '.'); ?>">
+                                <input type="text" disabled
+                                    value="Rp <?php echo number_format($pegawai['gaji'], 0, ',', '.'); ?>">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group" style="flex: 1; margin-right: 10px;">
                                 <label><i class="fas fa-calendar-alt"></i> Tanggal Masuk</label>
-                                <input type="text" disabled value="<?php echo date('d F Y', strtotime($pegawai['tanggal_masuk'])); ?>">
+                                <input type="text" disabled
+                                    value="<?php echo date('d F Y', strtotime($pegawai['tanggal_masuk'])); ?>">
                             </div>
 
                             <div class="form-group" style="flex: 1;">
@@ -113,8 +119,7 @@ if (!$pegawai) {
                                 $statusLabel = ucfirst($pegawai['status_aktif']); // Aktif / Tidak aktif
                                 $statusColor = (strtolower($pegawai['status_aktif']) == 'aktif' || $pegawai['status_aktif'] == 1) ? 'green' : 'red';
                                 ?>
-                                <input type="text" disabled
-                                    value="<?php echo $statusLabel; ?>"
+                                <input type="text" disabled value="<?php echo $statusLabel; ?>"
                                     style="font-weight: bold; color: <?php echo $statusColor; ?>;">
                             </div>
                         </div>
@@ -135,19 +140,19 @@ if (!$pegawai) {
                             }
                             ?>
 
-                            <input type="text"
-                                disabled
-                                value="<?php echo htmlspecialchars($status_kawin); ?>"
+                            <input type="text" disabled value="<?php echo htmlspecialchars($status_kawin); ?>"
                                 style="font-weight:bold;color:<?php echo $warna; ?>;">
                         </div>
 
 
 
-                        <div class="card-header" style="background-color: #f8f9fa; border-top: 1px solid #ddd; padding: 15px;">
+                        <div class="card-header"
+                            style="background-color: #f8f9fa; border-top: 1px solid #ddd; padding: 15px;">
                             <a href="index.php?page=pegawai" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
-                            <a href="edit_pegawai.php?id=<?php echo $pegawai['id_pegawai']; ?>" class="btn btn-primary" style="margin-left: 10px;">
+                            <a href="edit_pegawai.php?id=<?php echo $pegawai['id_pegawai']; ?>" class="btn btn-primary"
+                                style="margin-left: 10px;">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                         </div>
@@ -176,7 +181,8 @@ if (!$pegawai) {
         width: 100%;
         height: 100%;
         overflow: auto;
-        background-color: rgba(0, 0, 0, 0.85); /* Hitam transparan */
+        background-color: rgba(0, 0, 0, 0.85);
+        /* Hitam transparan */
     }
 
     /* Style Gambar di dalam Modal */
@@ -185,7 +191,8 @@ if (!$pegawai) {
         display: block;
         width: 80%;
         max-width: 700px;
-        max-height: 85vh; /* Agar tidak kepanjangan di layar */
+        max-height: 85vh;
+        /* Agar tidak kepanjangan di layar */
         object-fit: contain;
     }
 
@@ -209,13 +216,23 @@ if (!$pegawai) {
     }
 
     @-webkit-keyframes zoom {
-        from { -webkit-transform: scale(0) }
-        to { -webkit-transform: scale(1) }
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
     }
 
     @keyframes zoom {
-        from { transform: scale(0) }
-        to { transform: scale(1) }
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
     }
 
     /* Tombol Close (X) */
@@ -256,8 +273,8 @@ if (!$pegawai) {
     // Fungsi membuka modal (dipanggil saat gambar diklik)
     function openModal(element) {
         modal.style.display = "block";
-        modalImg.src = element.src; 
-        captionText.innerHTML = element.alt; 
+        modalImg.src = element.src;
+        captionText.innerHTML = element.alt;
     }
 
     // Fungsi menutup modal
