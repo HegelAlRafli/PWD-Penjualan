@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -17,27 +19,49 @@
                     <h1>Sistem Pendataan Barang</h1>
                 </div>
             </div>
-            <div class="header-right">
-                <div class="date-time">
-                    <i class="fas fa-clock"></i>
-                    <span id="current-date"><?php echo date('d/m/Y'); ?></span>
-                </div>
+            <div class="date-time">
+                <i class="fas fa-clock"></i>
+                <span id="current-date">
+                    <?php
+                    $bulan = array(
+                        1 =>   'Januari',
+                        'Februari',
+                        'Maret',
+                        'April',
+                        'Mei',
+                        'Juni',
+                        'Juli',
+                        'Agustus',
+                        'September',
+                        'Oktober',
+                        'November',
+                        'Desember'
+                    );
+
+                    $tgl = date('j');
+                    $bln = $bulan[(int)date('n')];
+                    $thn = date('Y');
+
+                    echo $tgl . ' ' . $bln . ' ' . $thn;
+                    ?>
+                </span>
             </div>
         </header>
 
         <!-- Notifikasi -->
-        <?php if(isset($_SESSION['pesan'])): ?>
-        <div class="notification <?php echo $_SESSION['tipe']; ?>">
-            <div class="notification-content">
-                <i class="fas <?php echo $_SESSION['tipe'] == 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
-                <span><?php echo $_SESSION['pesan']; ?></span>
+        <?php if (isset($_SESSION['pesan'])): ?>
+            <div class="notification <?php echo $_SESSION['tipe']; ?>">
+                <div class="notification-content">
+                    <i
+                        class="fas <?php echo $_SESSION['tipe'] == 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?>"></i>
+                    <span><?php echo $_SESSION['pesan']; ?></span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.style.display='none'">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <button class="notification-close" onclick="this.parentElement.style.display='none'">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <?php 
-        unset($_SESSION['pesan']);
-        unset($_SESSION['tipe']);
-        endif; 
+        <?php
+            unset($_SESSION['pesan']);
+            unset($_SESSION['tipe']);
+        endif;
         ?>
